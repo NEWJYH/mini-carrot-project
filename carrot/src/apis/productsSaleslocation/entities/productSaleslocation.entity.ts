@@ -15,14 +15,16 @@ export class ProductSaleslocation {
   addressDetail: string;
 
   // 위도
-  @Column({ type: 'decimal' })
+  @Column({ type: 'double' })
   latitude: number;
 
   // 경도
-  @Column({ type: 'decimal' })
+  @Column({ type: 'double' })
   logitude: number;
 
   // 거래 예정시각
   @Column()
   meetingTime: Date;
 }
+
+// product와 1대1 관계
