@@ -20,9 +20,6 @@ export class ProductResolver {
     return this.productService.findAll();
   }
 
-  
-
-
   // 물품등록
   @Mutation(() => Product)
   createProduct(

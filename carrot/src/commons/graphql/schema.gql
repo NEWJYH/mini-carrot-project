@@ -25,11 +25,10 @@ type ProductCategory {
 type User {
   id: String!
   email: String!
-  password: String!
-  nickName: String!
+  nickName: String
   mobileNumber: String!
   point: Int!
-  mannerTemperature: Int!
+  mannerTemperature: Float!
   isLogin: Boolean!
   createdAt: DateTime!
   isDelete: Boolean!
@@ -71,7 +70,6 @@ type Query {
   fetchProductCategorys: [ProductCategory!]!
   fetchProductCategoryId(categoryId: String!): ProductCategory!
   containsProductCategoryName(categoryName: String!): Boolean!
-  getHello: String!
 }
 
 type Mutation {
@@ -79,6 +77,7 @@ type Mutation {
   createProductCategory(name: String!): ProductCategory!
   updateProductCategory(categoryId: String!, categoryName: String!): ProductCategory!
   deleteProductCategory(categoryId: String!): Boolean!
+  createUser(email: String!, password: String!, mobileNumber: String!): User!
 }
 
 input CreateProductInput {

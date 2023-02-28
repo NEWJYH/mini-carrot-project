@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductSaleslocation } from '../productsSaleslocation/entities/productSaleslocation.entity';
 import { ProductTag } from '../productTags/entities/productTag.entity';
+import { User } from '../users/entities/user.entity';
 import { Product } from './entities/product.entity';
 
 @Injectable()
@@ -14,15 +15,29 @@ export class ProductService {
     private readonly productSaleslocationRepository: Repository<ProductSaleslocation>,
     @InjectRepository(ProductTag)
     private readonly productTagRepository: Repository<ProductTag>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   // READ
   async findOne({ productId }) {
-    return await this.productRepository.findOne({ where: { id: productId } });
+    const result = await this.productRepository.findOne({
+      where: { id: productId },
+      relations: ['productSaleslocation', 'productCategory', 'productTags'],
+    });
+
+    console.log(result);
   }
   // READ ALL
   async findAll() {
-    return await this.productRepository.find();
+    return await this.productRepository.find({
+      relations: [
+        'productSaleslocation',
+        'productCategory',
+        'productTags',
+        'user',
+      ],
+    });
   }
 
   // create
@@ -34,6 +49,10 @@ export class ProductService {
       seller,
       ...product
     } = createProductInput;
+
+    const user = await this.userRepository.findOne({ where: { id: seller } });
+    if (!user) return null;
+    console.log(user);
     // 상품 주소 테이블
     const result = await this.productSaleslocationRepository.save({
       ...productSaleslocation,

@@ -96,8 +96,8 @@ export class Product {
   isSoldout: boolean;
 
   // 판매자 id
-  @ManyToOne(() => User)
-  @Field(() => User)
+  @ManyToOne(() => User, { nullable: false })
+  @Field(() => User, { nullable: false })
   seller: User;
 
   // 구매자 id

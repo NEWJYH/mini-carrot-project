@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -22,12 +22,12 @@ export class User {
 
   // 비밀번호
   @Column()
-  @Field(() => String)
+  // @Field(() => String) // 비밀번호 노출 금지
   password: string;
 
   //설정닉네임
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   nickName: string;
 
   //휴대폰번호
@@ -36,17 +36,17 @@ export class User {
   mobileNumber: string;
 
   //거래사용 포인트
-  @Column()
+  @Column({ default: 0 })
   @Field(() => Int)
   point: number;
 
   // 매너온도
-  @Column()
-  @Field(() => Int)
+  @Column({ type: 'float', default: 36.5 })
+  @Field(() => Float)
   mannerTemperature: number;
 
   //로그인 상태
-  @Column()
+  @Column({ default: false })
   @Field(() => Boolean)
   isLogin: boolean;
 
