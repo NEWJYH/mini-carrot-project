@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductCategory } from './entities/productCategory.entity';
-import { ProductCategoryResolver } from './productCategory.resolver';
 
 @Injectable()
 export class ProductCategoryService {
@@ -62,7 +61,6 @@ export class ProductCategoryService {
     // const result = await this.productCategoryRepository.softRemove({
     //   id: categoryId,
     // });
-
     const result = await this.productCategoryRepository.softDelete({
       id: categoryId,
     });

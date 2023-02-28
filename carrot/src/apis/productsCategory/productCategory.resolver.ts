@@ -12,6 +12,7 @@ export class ProductCategoryResolver {
   fetchProductCategorys() {
     return this.productCategoryService.findAll();
   }
+
   // READ
   @Query(() => ProductCategory)
   fetchProductCategoryId(@Args('categoryId') categoryId: string) {

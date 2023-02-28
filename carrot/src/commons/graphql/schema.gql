@@ -2,12 +2,72 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ProductSaleslocation {
+  id: String!
+  address: String!
+  addressDetail: String!
+  latitude: Float!
+  logitude: Float!
+  meetingTime: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type ProductCategory {
   id: String!
   name: String!
+  deletedAt: DateTime!
+}
+
+type User {
+  id: String!
+  email: String!
+  password: String!
+  nickName: String!
+  mobileNumber: String!
+  point: Int!
+  mannerTemperature: Int!
+  isLogin: Boolean!
+  createdAt: DateTime!
+  isDelete: Boolean!
+  updatedAt: DateTime!
+}
+
+type Product {
+  id: String!
+  title: String!
+  description: String!
+  price: Int!
+  proposition: Boolean!
+  likeCount: Int!
+  viewCount: Int!
+  sharing: Boolean!
+  createdAt: DateTime!
+  deletedAt: DateTime!
+  updatedAt: DateTime!
+  refreshedAt: DateTime!
+  status: Boolean!
+  soldedAt: DateTime!
+  isSoldout: Boolean!
+  seller: User!
+  buyer: User
+  productCategory: ProductCategory!
+  productSaleslocation: ProductSaleslocation!
+  productTags: [ProductTag!]!
+}
+
+type ProductTag {
+  id: String!
+  name: String!
+  products: [Product!]!
 }
 
 type Query {
+  fetchProduct(productId: String!): Product!
+  fetchProducts: [Product!]!
   fetchProductCategorys: [ProductCategory!]!
   fetchProductCategoryId(categoryId: String!): ProductCategory!
   containsProductCategoryName(categoryName: String!): Boolean!
@@ -15,7 +75,28 @@ type Query {
 }
 
 type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
   createProductCategory(name: String!): ProductCategory!
   updateProductCategory(categoryId: String!, categoryName: String!): ProductCategory!
   deleteProductCategory(categoryId: String!): Boolean!
+}
+
+input CreateProductInput {
+  title: String!
+  description: String!
+  price: Int!
+  proposition: Boolean!
+  seller: String!
+  sharing: Boolean!
+  productCategoryId: String!
+  productSaleslocation: ProductSaleslocationInput!
+  productTags: [String!]!
+}
+
+input ProductSaleslocationInput {
+  address: String!
+  addressDetail: String!
+  latitude: Float!
+  logitude: Float!
+  meetingTime: DateTime
 }

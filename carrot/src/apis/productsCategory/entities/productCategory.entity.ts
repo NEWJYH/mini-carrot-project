@@ -13,10 +13,11 @@ export class ProductCategory {
   @Field(() => String)
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => String)
   name: string;
 
   @DeleteDateColumn()
+  @Field(() => Date)
   deletedAt: Date;
 }
