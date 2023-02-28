@@ -8,9 +8,14 @@ type ProductCategory {
 }
 
 type Query {
+  fetchProductCategorys: [ProductCategory!]!
+  fetchProductCategoryId(categoryId: String!): ProductCategory!
+  containsProductCategoryName(categoryName: String!): Boolean!
   getHello: String!
 }
 
 type Mutation {
   createProductCategory(name: String!): ProductCategory!
+  updateProductCategory(categoryId: String!, categoryName: String!): ProductCategory!
+  deleteProductCategory(categoryId: String!): Boolean!
 }
