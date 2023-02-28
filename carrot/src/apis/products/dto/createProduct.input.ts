@@ -33,7 +33,6 @@ export class CreateProductInput {
   @Field(() => String)
   productCategoryId: string;
 
-  // 상품 거래 위치 id  - 1대 1 관계
   @Field(() => ProductSaleslocationInput)
   productSaleslocation: ProductSaleslocationInput;
 

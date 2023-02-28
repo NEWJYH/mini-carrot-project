@@ -74,6 +74,8 @@ type Query {
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(producId: String!): Boolean!
   createProductCategory(name: String!): ProductCategory!
   updateProductCategory(categoryId: String!, categoryName: String!): ProductCategory!
   deleteProductCategory(categoryId: String!): Boolean!
@@ -98,4 +100,16 @@ input ProductSaleslocationInput {
   latitude: Float!
   logitude: Float!
   meetingTime: DateTime
+}
+
+input UpdateProductInput {
+  title: String
+  description: String
+  price: Int
+  proposition: Boolean
+  seller: String
+  sharing: Boolean
+  productCategoryId: String
+  productSaleslocation: ProductSaleslocationInput
+  productTags: [String!]
 }

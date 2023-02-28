@@ -87,8 +87,8 @@ export class Product {
 
   // 상품 판매 완료시간
   @Column({ nullable: true })
-  @Field(() => Date || null)
-  soldedAt: Date | null;
+  @Field(() => Date)
+  soldedAt: Date;
 
   // 상품 판매 완료시 True
   @Column({ default: false })
@@ -96,8 +96,8 @@ export class Product {
   isSoldout: boolean;
 
   // 판매자 id
-  @ManyToOne(() => User, { nullable: false })
-  @Field(() => User, { nullable: false })
+  @ManyToOne(() => User)
+  @Field(() => User)
   seller: User;
 
   // 구매자 id
