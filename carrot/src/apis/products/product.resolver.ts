@@ -31,21 +31,21 @@ export class ProductResolver {
 
   // update
   @Mutation(() => Product)
-  async updateProduct(
+  updateProduct(
     @Args('productId') productId: string,
     @Args('updateProductInput') updateProductInput: UpdateProductInput,
   ) {
     // 판매 완료가 되었는지 확인해보기
-    await this.productService.checkSoldout({ productId });
+    this.productService.checkSoldout({ productId });
     // 수정하기
-    return await this.productService.update({ productId, updateProductInput });
+    return this.productService.update({ productId, updateProductInput });
   }
 
   // delete
   @Mutation(() => Boolean)
-  async deleteProduct(
+  deleteProduct(
     @Args('producId') productId: string, //
   ) {
-    return await this.productService.delete({ productId });
+    return this.productService.delete({ productId });
   }
 }
