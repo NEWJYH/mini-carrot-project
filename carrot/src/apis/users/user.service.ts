@@ -10,7 +10,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async create({ email, password, mobileNumber }) {
+  async create({ email, hashedPassword: password, mobileNumber }) {
     const user = await this.userRepository.findOne({ where: { email } });
     if (user) throw new ConflictException('이미 등록된 이메일 입니다.');
 
